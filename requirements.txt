@@ -1,0 +1,8 @@
+# cursor_agent_api has no external dependencies beyond Python 3.10+
+# The following are optional for development/testing:
+
+# For type checking
+# mypy>=1.0
+
+# For testing
+# pytest>=7.0
