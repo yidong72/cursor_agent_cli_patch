@@ -10,6 +10,22 @@ A Python wrapper for the `cursor-agent` CLI that exposes its input/output functi
 - **Async Support**: asyncio-compatible API for concurrent usage
 - **Tool Monitoring**: Track tool calls (file edits, shell commands, etc.)
 
+## Installation
+
+### From PyPI (when published)
+
+```bash
+pip install cursor-agent-api
+```
+
+### From source (development)
+
+```bash
+git clone https://github.com/yidong/cursor-agent-api.git
+cd cursor-agent-api
+pip install -e .
+```
+
 ## Prerequisites
 
 1. `cursor-agent` CLI must be installed and authenticated
@@ -300,11 +316,14 @@ python3 test_api.py
 
 ## Patching cursor-agent
 
-The original `patch-cursor-agent` script enables the "Run Everything" feature:
+After installing the package, you can use the `patch-cursor-agent` command to enable the "Run Everything" feature:
 
 ```bash
 # Apply the patch
 patch-cursor-agent
+
+# Check if patch is needed without applying
+patch-cursor-agent --dry-run
 
 # This changes:
 # enableRunEverything = false → enableRunEverything = true

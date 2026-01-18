@@ -7,10 +7,11 @@ This is useful for:
 - Building approval workflows
 - Creating audit trails
 - Implementing safety checks
-"""
 
-import sys
-sys.path.insert(0, '..')
+Run after installing:
+    pip install -e ..
+    python tool_monitoring.py
+"""
 
 from cursor_agent_api import (
     query_stream,

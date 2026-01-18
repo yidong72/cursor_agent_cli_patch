@@ -584,7 +584,7 @@ class TestCursorAgentClient(unittest.TestCase):
         
         self.assertIsNone(event)
     
-    @patch('cursor_agent_api.subprocess.run')
+    @patch('cursor_agent_api.client.subprocess.run')
     def test_query_success(self, mock_run):
         """Test successful query."""
         mock_run.return_value = Mock(
@@ -602,7 +602,7 @@ class TestCursorAgentClient(unittest.TestCase):
         self.assertEqual(result.request_id, "req")
         self.assertEqual(result.duration_ms, 100)
     
-    @patch('cursor_agent_api.subprocess.run')
+    @patch('cursor_agent_api.client.subprocess.run')
     def test_query_error_return_code(self, mock_run):
         """Test query with non-zero return code."""
         mock_run.return_value = Mock(
@@ -617,7 +617,7 @@ class TestCursorAgentClient(unittest.TestCase):
         self.assertFalse(result.success)
         self.assertEqual(result.error, "Error message")
     
-    @patch('cursor_agent_api.subprocess.run')
+    @patch('cursor_agent_api.client.subprocess.run')
     def test_query_invalid_json_response(self, mock_run):
         """Test query with invalid JSON response."""
         mock_run.return_value = Mock(
@@ -632,7 +632,7 @@ class TestCursorAgentClient(unittest.TestCase):
         self.assertFalse(result.success)
         self.assertIn("Failed to parse JSON", result.error)
     
-    @patch('cursor_agent_api.subprocess.run')
+    @patch('cursor_agent_api.client.subprocess.run')
     def test_query_timeout(self, mock_run):
         """Test query with timeout."""
         mock_run.side_effect = subprocess.TimeoutExpired("cmd", 30)
@@ -643,7 +643,7 @@ class TestCursorAgentClient(unittest.TestCase):
         self.assertFalse(result.success)
         self.assertEqual(result.error, "Request timed out")
     
-    @patch('cursor_agent_api.subprocess.run')
+    @patch('cursor_agent_api.client.subprocess.run')
     def test_query_exception(self, mock_run):
         """Test query with exception."""
         mock_run.side_effect = Exception("Connection failed")
@@ -654,7 +654,7 @@ class TestCursorAgentClient(unittest.TestCase):
         self.assertFalse(result.success)
         self.assertEqual(result.error, "Connection failed")
     
-    @patch('cursor_agent_api.subprocess.run')
+    @patch('cursor_agent_api.client.subprocess.run')
     def test_query_with_mode(self, mock_run):
         """Test query with mode parameter."""
         mock_run.return_value = Mock(
@@ -671,7 +671,7 @@ class TestCursorAgentClient(unittest.TestCase):
         self.assertIn("--mode", cmd)
         self.assertIn("plan", cmd)
     
-    @patch('cursor_agent_api.subprocess.Popen')
+    @patch('cursor_agent_api.client.subprocess.Popen')
     def test_query_stream(self, mock_popen):
         """Test streaming query."""
         mock_process = Mock()
@@ -691,7 +691,7 @@ class TestCursorAgentClient(unittest.TestCase):
         self.assertEqual(len(events), 1)
         self.assertEqual(events[0].text, "Hi")
     
-    @patch('cursor_agent_api.subprocess.run')
+    @patch('cursor_agent_api.client.subprocess.run')
     def test_create_session(self, mock_run):
         """Test creating a new session."""
         mock_run.return_value = Mock(
@@ -708,7 +708,7 @@ class TestCursorAgentClient(unittest.TestCase):
         cmd = mock_run.call_args[0][0]
         self.assertIn("create-chat", cmd)
     
-    @patch('cursor_agent_api.subprocess.run')
+    @patch('cursor_agent_api.client.subprocess.run')
     def test_list_models(self, mock_run):
         """Test listing models."""
         mock_run.return_value = Mock(
@@ -1102,7 +1102,7 @@ class TestEdgeCases(unittest.TestCase):
         """Test parsing result with is_error field."""
         client = CursorAgentClient()
         
-        with patch('cursor_agent_api.subprocess.run') as mock_run:
+        with patch('cursor_agent_api.client.subprocess.run') as mock_run:
             mock_run.return_value = Mock(
                 returncode=0,
                 stdout='{"type": "result", "subtype": "success", "result": "ok", "session_id": "abc", "is_error": true, "error": "warning"}',

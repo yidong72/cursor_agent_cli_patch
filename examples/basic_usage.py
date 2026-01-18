@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """
 Basic usage examples for cursor_agent_api.
-"""
 
-import sys
-sys.path.insert(0, '..')
+Run after installing:
+    pip install -e ..
+    python basic_usage.py
+"""
 
 from cursor_agent_api import (
     query,

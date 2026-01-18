@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cursor-agent-api"
+version = "0.1.0"
+description = "Python wrapper for cursor-agent CLI"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Yidong"}
+]
+keywords = ["cursor", "agent", "cli", "api", "wrapper"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+
+# No external dependencies - uses only stdlib
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "mypy>=1.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/yidong/cursor-agent-api"
+Repository = "https://github.com/yidong/cursor-agent-api"
+Issues = "https://github.com/yidong/cursor-agent-api/issues"
+
+[project.scripts]
+# Optional CLI entry point for the patch script
+patch-cursor-agent = "cursor_agent_api.patch:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["cursor_agent_api*"]
+
+[tool.setuptools.package-data]
+cursor_agent_api = ["py.typed"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_functions = ["test_*"]

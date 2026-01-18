@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """
 Async usage examples for cursor_agent_api.
+
+Run after installing:
+    pip install -e ..
+    python async_usage.py
 """
 
 import asyncio
-import sys
-sys.path.insert(0, '..')
 
 from cursor_agent_api import (
     AsyncCursorAgentClient,
