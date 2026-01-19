@@ -44,9 +44,8 @@ Issues = "https://github.com/yidong/cursor-agent-api/issues"
 # Optional CLI entry point for the patch script
 patch-cursor-agent = "cursor_agent_api.patch:main"
 
-[tool.setuptools.packages.find]
-where = ["."]
-include = ["cursor_agent_api*"]
+[tool.setuptools]
+packages = ["cursor_agent_api"]
 
 [tool.setuptools.package-data]
 cursor_agent_api = ["py.typed"]
